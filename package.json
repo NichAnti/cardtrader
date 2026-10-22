@@ -11,7 +11,9 @@
     "typecheck": "tsc --noEmit",
     "format": "oxfmt",
     "test": "vitest run",
-    "lint": "oxlint src && effect-tsgo patch --no-typescript --oxlint && oxlint --config .oxlintrc.effect.json --deny-warnings src"
+    "lint": "oxlint src && effect-tsgo patch --no-typescript --oxlint && oxlint --config .oxlintrc.effect.json --deny-warnings src",
+    "check": "oxfmt --check && bun run lint && bun run typecheck && bun run test",
+    "prepare": "test -z \"$CI\" && simple-git-hooks || true"
   },
   "dependencies": {
     "@effect/platform-browser": "4.0.0",
@@ -33,9 +35,13 @@
     "oxfmt": "^0.66.0",
     "oxlint": "1.85.0",
     "oxlint-tsgolint": "7.0.2003",
+    "simple-git-hooks": "^2.14.0",
     "tailwindcss": "^4.3.3",
     "typescript": "^7.0.2",
     "vite": "^8.3.1",
     "vitest": "^5.0.2"
+  },
+  "simple-git-hooks": {
+    "pre-push": "bun run check"
   }
 }
