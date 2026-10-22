@@ -18,3 +18,12 @@ Domain vocabulary, deployment steps, local conventions that differ from Foldkit'
 - Deployment is `Cloudflare.Website.Foldkit` in `alchemy.run.ts`. API routes live in `src/worker.ts` under `/api` and `/api/*` (`assets.runWorkerFirst`); unknown API paths return 404 JSON, everything else falls through to the SPA.
 - Stages: `dev_<user>` (local `bun run dev`), `pr-<n>` (PR previews), `prod` (pushes to `main`). Only CI deploys or destroys `prod`.
 - Run `bun run check` before pushing; CI runs the same script before every deploy.
+
+### Working Rules
+
+- Propose every change as an exact diff and wait for explicit approval before editing any file.
+- Make no changes outside this repository (system config, global tools, dotfiles, agent memory) unless explicitly asked.
+- The user runs commands (`nix develop`, `bun`, `git`, deploys) unless they ask the agent to; give exact, copy-pasteable commands.
+- Verify against official docs, official example repos, or the installed package source in `node_modules` before stating how something works. Say clearly what is unverified.
+- Prefer the official example over a custom approach; when deviating, say so and why.
+- Never deploy or destroy `prod` and never push to `main`; changes go through a PR.
