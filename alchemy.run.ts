@@ -5,7 +5,7 @@ import * as Effect from 'effect/Effect'
 export const Website = Cloudflare.Website.Foldkit('Website', {
   main: 'src/worker.ts',
   assets: {
-    runWorkerFirst: ['/api/*'],
+    runWorkerFirst: ['/api', '/api/*'],
   },
 })
 
